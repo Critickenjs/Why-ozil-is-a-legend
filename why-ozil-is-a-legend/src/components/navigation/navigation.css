@@ -1,0 +1,79 @@
+/* navigation.css */
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: "Poppins";
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    /* Correction : Utilisez "top" au lieu de "margin" pour positionner en haut */
+    left: 0;
+    /* Correction : Ajout de "left" pour positionner à gauche */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    /* Ajout de padding pour éviter que le contenu soit collé au bord */
+}
+
+.navbar .logo {
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    /* Ajout de la couleur du texte */
+}
+
+.navbar .nav-links ul {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.navbar .nav-links ul li {
+    margin: 0 15px;
+    /* Correction : Espacement entre les éléments de la liste */
+}
+
+.navbar .nav-links a {
+    color: white;
+}
+
+.navbar .nav-links a:hover {
+    color: red;
+    /* Ajout de la couleur au survol */
+    font-weight: 600;
+}
+
+.navbar .menu-hamburger {
+    display: none;
+    position: absolute;
+    top: 35px;
+    right: 50px;
+    width: 35px;
+}
+
+@media screen and (max-width :900px) {
+    .navbar .menu-hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        display: flex;
+    }
+
+    .nav-links ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
