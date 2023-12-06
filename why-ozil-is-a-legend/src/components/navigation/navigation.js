@@ -1,41 +1,26 @@
-// Navigation.jsx
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import './navigation.css';
-import btn from '../../rss/img/menu-btn.png';
+// navigation.js
+import React from 'react';
+import { Nav, Navbar, Container } from 'react-bootstrap';
+import "./navigation.css"
 
+// rest of your code
 
-
-const Navigation = () => {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-    // Fonction pour basculer l'état du menu mobile
-    const toggleMobileMenu = () => {
-        setMobileMenuOpen(!mobileMenuOpen);
-    };
-
+function Navigation() {
     return (
-        <nav className='navbar'>
-            <a href='/' className='logo'>Mesut Özil</a>
-            <div className='nav-links'>
-                <ul>
-                    <li>
-                        <NavLink to="/" activeClassName="nav-active" exact>
-                            Accueil
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/Carriere" activeClassName="nav-active">
-                            Carriere
-                        </NavLink>
-                    </li>
-                </ul>
-            </div>
-            <img src={btn} alt="btn" className='menu-hamburger' />
-        </nav>
+        <>
+            <Navbar className="redBackground" variant="dark">
+                <Container>
+                    <Navbar.Brand href="/" className="whiteText">Mesut Özil</Navbar.Brand>
+                    <Nav className="ms-auto">
+                        <Nav.Link href="/" className="whiteText" >Accueil</Nav.Link>
+                        <Nav.Link href="/Carriere" className="whiteText " >Carrière</Nav.Link>
+                    </Nav>
+                </Container>
+            </Navbar>
+
+        </>
     );
 }
-
 
 export default Navigation;
 
