@@ -1,0 +1,29 @@
+/* Ajoutez ce CSS à votre fichier CSS ou directement dans votre fichier React si vous utilisez des styles en ligne */
+
+/* Pour aligner les colonnes verticalement */
+.row {
+    display: flex;
+    align-items: center;
+}
+
+/* Facultatif : Pour centrer les colonnes horizontalement */
+.col {
+    margin: auto;
+}
+
+/* Facultatif : Ajoutez une marge en haut pour séparer du haut de la page */
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.col-image {
+    text-align: right;
+    right: 100%;
+}
+
+/* Pour réduire la taille de l'image (ajustez la largeur selon vos besoins) */
+.col-image img {
+    width: 100%;
+    max-width: 70%;
+    height: auto;
+}
