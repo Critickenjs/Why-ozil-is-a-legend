@@ -5,6 +5,7 @@ import React from 'react';
 const Footer = () => {
     return (
         <footer style={footerStyle}>
+            <a>Yliess El atifi</a>
             <a
                 href="https://github.com/Critickenjs"
                 target="_blank"
@@ -16,27 +17,29 @@ const Footer = () => {
                     style={githubBtnStyle}
                 />
             </a>
-            <a>  Yliess El atifi</a>
+            
         </footer>
     );
 };
 
-// Styles
 const footerStyle = {
-    backgroundColor: '#1a1055',
-    padding: '10px',
+    backgroundColor: 'red',
+    padding: '5px',
     textAlign: 'center',
     position: 'fixed',
     bottom: 0,
     width: '100%',
     justifyContent: 'center',
-    spacebetween: 'center',
+    spaceBetween: '10px',
     color: 'white',
 };
 
 const githubBtnStyle = {
-    width: '30px', // Ajustez la largeur selon vos besoins
-    height: '30px', // Ajustez la hauteur selon vos besoins
+    width: '30px',
+    height: '30px',
+    position: 'relative',
+    bottom: '5px',
+    left: 'auto',
 };
 
 export default Footer;

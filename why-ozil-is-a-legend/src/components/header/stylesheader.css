@@ -4,49 +4,22 @@ body {
 }
 
 
-.redBackground {
-    background-color: #5f2025;
-}
-
-.whiteText {
-    color: white;
-}
-
-.navLink {
-    color: white;
-    margin-right: 20px;
-    /* Ajoutez une marge à droite pour espacer les liens */
-    /* Ajoutez d'autres styles personnalisés au besoin */
-}
-
-/* FILEPATH: /c:/Users/ylies/OneDrive/Bureau/INFO/Why-ozil-is-a-legend/why-ozil-is-a-legend/src/components/navigation/navigation.css */
-
-/* Styles de base pour la barre de navigation */
-.navbar {
-    background-color: #1a1055;
-    overflow: hidden;
-}
-
-/* Styles pour les liens de navigation */
-.navbar a {
-    float: left;
-    display: block;
-    color: white;
+.nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 10px 0;
+   }
+   
+   .nav-item {
+    padding: 10px;
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-/* Styles pour les liens de navigation au survol */
-.navbar a:hover {
-    color: black;
-}
-
-/* Styles pour la barre de navigation en mode responsive */
-@media screen and (max-width: 600px) {
-    .navbar a {
-        float: none;
-        display: block;
-        text-align: left;
+    cursor: pointer;
+   }
+   
+   @media (max-width: 768px) {
+    .nav {
+       flex-direction: column;
     }
-}
+   }
