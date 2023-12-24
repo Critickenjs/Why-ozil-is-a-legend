@@ -1,6 +1,7 @@
 // Footer.js
 
 import React from 'react';
+import './Footer.css';
 
 const Footer = () => {
     return (
@@ -23,7 +24,7 @@ const Footer = () => {
 };
 
 const footerStyle = {
-    backgroundColor: 'red',
+    backgroundColor: '#f5f5f5',
     padding: '5px',
     textAlign: 'center',
     position: 'fixed',
@@ -31,7 +32,7 @@ const footerStyle = {
     width: '100%',
     justifyContent: 'center',
     spaceBetween: '10px',
-    color: 'white',
+    color: 'Black',
 };
 
 const githubBtnStyle = {

@@ -1,7 +1,7 @@
 /* General styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background-image: url("../../rss/img/ozil-arsenal.jpg") ;
     
 }
 
@@ -63,4 +63,21 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: #34495e;
+}
+.register-link {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 90%;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 100%;
+
+    
+}
+
+.register-link a:hover {
+    text-decoration: underline;
 }

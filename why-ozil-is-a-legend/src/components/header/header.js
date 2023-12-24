@@ -14,7 +14,6 @@ function Header() {
                         <Nav.Link href="/" className="nav-item" >Accueil</Nav.Link>
                         <Nav.Link href="/Carriere" className="nav-item " >Carrière</Nav.Link>
                         <Nav.Link href="/login" className="nav-item " >Connection</Nav.Link>
-                        <Nav.Link href="/login" className="nav-item " >Créer un compte</Nav.Link>
 
 
 
