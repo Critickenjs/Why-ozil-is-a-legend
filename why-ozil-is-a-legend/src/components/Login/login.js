@@ -19,11 +19,14 @@ const Login = () => {
     };
 
     return (
-        <><div>
+        <>
             <Header />
-        </div><div className="login-container">
-
+        
+            <div className="login-container">
+                <div className="login-image">
                 <h2>Login</h2>
+                </div>
+                <div className="container">
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"
@@ -36,7 +39,9 @@ const Login = () => {
                         value={password}
                         onChange={handlePasswordChange} />
                     <button type="submit">Login</button>
+                    
                 </form>
+                </div>
             </div></>
     );
 };
