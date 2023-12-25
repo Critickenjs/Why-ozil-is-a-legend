@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import backgroundImage from '../../rss/img/ozil-arsenal.jpg';
+import { Link } from "react-router-dom";
+import { auth } from "../../Firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import "./login.css";
-
+import Signup from "./Signup";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -17,8 +20,18 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    signInWithEmailAndPassword(auth, username, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        window.location.href = "/Accueil";        
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
   };
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
@@ -37,29 +50,23 @@ const Login = () => {
   useEffect(() => {
     // Modifier le style du corps en fonction de la résolution
     if (windowWidth > 800) {
-      document.body.style.backgroundImage = `url(${"https://www.newarab.com/sites/default/files/styles/large_16_9/public/media/images/74B4FA0C-C3D5-454B-BB71-826753ACF58F.jpg?h=d1cb525d&itok=xj4woKUS"})`;
+      document.body.style.backgroundImage = `url(${"https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt0819fc5420faca2a/60daf995d9a5243b6699d504/f4223ea9712c9372162b7177a2984eaa71582390.jpg?auto=webp&format=pjpg&width=3840&quality=60"})`;
     } else {
       document.body.style.backgroundImage = `url(${"https://w0.peakpx.com/wallpaper/432/50/HD-wallpaper-mesut-ozil-football-futbol-player.jpg"})`;
     }
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundPosition = "center";
-    document.body.style.backgroundAttachment = "fixed";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
     document.body.style.height = "100vh";
-    document.body.style.width = "100vw";
-    document.body.style.margin = "0";
-    document.body.style.padding = "0";
-    // Assurez-vous de rétablir l'état d'origine lors du démontage du composant
-    return () => {
-      document.body.style.backgroundImage = '';
-      document.body.style.backgroundSize = '';
-    };
+    document.body.style.overflow = "hidden";
+    document.body.style.display = "flex";
+    document.body.style.alignItems = "center";
+    document.body.style.justifyContent = "center";
+    document.body.style.fontFamily = "sans-serif";
   }, [windowWidth]);
-
 
   return (
     <>
-
       <div className="login-container">
         <div className="login-image">
           <h2>Connection</h2>
@@ -81,9 +88,9 @@ const Login = () => {
             <button type="submit">Login</button>
           </form>
         </div>
-        <div class="register-link">
+        <div className="register-link">
           Vous n'avez pas de compte ?{" "}
-          <a href="/signup">Inscrivez-vous ici</a>.
+          <Link to="/signup">Inscrivez-vous ici</Link>.
         </div>
       </div>
     </>

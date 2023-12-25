@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Accueil from "./pages/Accueil";
 import Carriere from "./pages/Carriere";
 import Login from "./components/Login/login";
+import Signup from "./components/Login/Signup";
 import './styles/styles.css'
 
 
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/carriere" element={<Carriere />} />
         <Route path="*" element={<Accueil />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   );
