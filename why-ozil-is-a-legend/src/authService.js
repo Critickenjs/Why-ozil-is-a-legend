@@ -21,4 +21,5 @@ const getCurrentUser = () => {
   });
 };
 
-export { listenToAuthChanges ,  getCurrentUser };
+
+export { listenToAuthChanges ,  getCurrentUser  };

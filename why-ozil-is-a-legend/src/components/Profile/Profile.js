@@ -1,25 +1,24 @@
-// Importations nécessaires
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {  getCurrentUser } from "../../authService"; // Assurez-vous d'importer les fonctions nécessaires
+import { getCurrentUser } from "../../authService";
 import { auth } from "../../Firebase";
-import { signOut } from "firebase/auth";
+import { signOut, updateProfile } from "firebase/auth";
 
-// Composant de la page de profil
 const Profile = () => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [newUsername, setNewUsername] = useState("");
+  const [newPhotoURL, setNewPhotoURL] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
+  
 
   useEffect(() => {
-    
     const fetchCurrentUser = async () => {
       try {
         const user = await getCurrentUser();
         setCurrentUser(user);
       } catch (error) {
-        // Gérer les erreurs de récupération de l'utilisateur
         console.error("Erreur lors de la récupération de l'utilisateur :", error);
-        // Rediriger vers la page de connexion en cas d'erreur
         navigate("/login");
       }
     };
@@ -29,14 +28,50 @@ const Profile = () => {
 
   const handleSignOut = () => {
     signOut(auth)
-    setCurrentUser(null);
-    console.log("Déconnexion réussie");
-    navigate("/");
-       
-};
+      .then(() => {
+        setCurrentUser(null);
+        console.log("Déconnexion réussie");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la déconnexion :", error);
+      });
+  };
+
+  const handleUpdateUsername = async () => {
+    try {
+      const user = auth.currentUser;
+
+      if (!user) {
+        console.error("Utilisateur non authentifié.");
+        return;
+      }
+
+      const currentUsername = user.displayName || "";
+
+      if (currentUsername !== newUsername || newPhotoURL) {
+        const updateObject = {};
+
+        if (currentUsername !== newUsername) {
+          updateObject.displayName = newUsername;
+        }
+
+        if (newPhotoURL) {
+          updateObject.photoURL = newPhotoURL;
+        }
+
+        await updateProfile(user, updateObject);
+
+        setCurrentUser({ ...currentUser, displayName: newUsername, photoURL: newPhotoURL });
+      }
+
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du profil :", error);
+    }
+  };
 
   if (!currentUser) {
-    // Afficher un message de chargement ou rediriger vers la page de connexion
     return <p>Chargement en cours...</p>;
   }
 
@@ -44,12 +79,46 @@ const Profile = () => {
     <div>
       <h2>Profil de {currentUser.displayName}</h2>
       <div>
-        <strong>Nom d'utilisateur:</strong> {currentUser.displayName}
+        <strong>Nom d'utilisateur:</strong>{" "}
+        {isEditing ? (
+          <input
+            type="text"
+            placeholder= "currentUser.displayName"
+            value={newUsername}
+            onChange={(e) => setNewUsername(e.target.value)}
+          />
+        ) : (
+          currentUser.displayName
+        )}
       </div>
       <div>
         <strong>Email:</strong> {currentUser.email}
       </div>
-      {/* Ajoutez d'autres informations de profil si nécessaire */}
+      <div>
+        <strong>Photo de profil:</strong>{" "}
+        {currentUser.photoURL ? (
+          <img src={currentUser.photoURL} alt="Profile" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+        ) : (
+          <p>Aucune photo de profil</p>
+        )}
+      </div>
+      <div>
+        <strong>Nouvelle photo de profil URL:</strong>{" "}
+        {isEditing ? (
+          <input
+            type="text"
+            value={newPhotoURL}
+            onChange={(e) => setNewPhotoURL(e.target.value)}
+          />
+        ) : (
+          newPhotoURL || "Aucune nouvelle photo"
+        )}
+      </div>
+      {isEditing ? (
+        <button onClick={handleUpdateUsername}>Enregistrer</button>
+      ) : (
+        <button onClick={() => setIsEditing(true)}>Modifier le profil</button>
+      )}
       <button onClick={handleSignOut}>Déconnexion</button>
     </div>
   );

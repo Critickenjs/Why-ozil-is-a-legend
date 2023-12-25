@@ -2,17 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { auth } from '../../Firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import "./signup.css";
+import { updateProfile } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 
 
 const Signup = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState("")
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const navigate = useNavigate();
 
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
 
     const handleUsernameChange = (e) => {
-        setUsername(e.target.value);
-    };
+      setUsername(e.target.value);
+  };
     const handleResize = () => {
         setWindowWidth(window.innerWidth);
       };
@@ -25,10 +34,19 @@ const Signup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        createUserWithEmailAndPassword(auth, username, password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user);
+                updateProfile(user, {
+                    displayName: username,
+                  })
+                    .then(() => {
+                      console.log("Profil mis à jour");
+                      navigate("/login");
+                    })
+                    .catch((error) => {
+                      console.error("Erreur lors de la mise à jour du profil :", error);
+                    });
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -71,6 +89,15 @@ const Signup = () => {
         <form onSubmit={handleSubmit}>
             <label>
                 Email:
+            </label>
+            <input
+              type="text"
+              value={email}
+              onChange={handleEmailChange}
+            />
+            <br />
+            <label>
+                Pseudo:
             </label>
             <input
               type="text"
