@@ -1,63 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { auth, storage } from '../../Firebase'; 
+// Importations nécessaires
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {  getCurrentUser } from "../../authService"; // Assurez-vous d'importer les fonctions nécessaires
+import { auth } from "../../Firebase";
+import { signOut } from "firebase/auth";
 
+// Composant de la page de profil
 const Profile = () => {
-    const [profilePhoto, setProfilePhoto] = useState(null);
-    const user = auth.currentUser; // Obtenez l'utilisateur actuellement connecté
+  const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        // Fonction pour récupérer l'URL de l'image existante
-        const fetchProfilePhoto = async () => {
-            try {
-                if (user) {
-                    const storageRef = ref(storage, `profiles/${user.uid}/profilePhoto.jpg`);
-                    console.log('storageRef:', storageRef);
-                    const url = await getDownloadURL(storageRef);
-                    setProfilePhoto(url);
-                }
-            } catch (error) {
-                console.error('Error fetching profile photo:', error);
-            }
-        };
-
-        // Appeler la fonction de récupération de l'image existante
-        fetchProfilePhoto();
-    }, [user]); // L'effet dépend de l'utilisateur, donc il s'exécute à chaque changement d'utilisateur.
-
-    const handlePhotoUpload = (event) => {
-        if (!user) {
-            console.error('User not authenticated.');
-            return;
-        }
-
-        const file = event.target.files[0];
-        const storageRef = ref(storage, `profiles/${user.uid}/profilePhoto.jpg`);
-
-        uploadBytesResumable(storageRef, file)
-            .then((snapshot) => {
-                console.log('Profile photo uploaded successfully!');
-                getDownloadURL(storageRef)
-                    .then((url) => {
-                        console.log('Download URL:', url);
-                        setProfilePhoto(url);
-                    })
-                    .catch((error) => {
-                        console.error('Error getting download URL:', error);
-                    });
-            })
-            .catch((error) => {
-                console.error('Error uploading profile photo:', error);
-            });
+  useEffect(() => {
+    
+    const fetchCurrentUser = async () => {
+      try {
+        const user = await getCurrentUser();
+        setCurrentUser(user);
+      } catch (error) {
+        // Gérer les erreurs de récupération de l'utilisateur
+        console.error("Erreur lors de la récupération de l'utilisateur :", error);
+        // Rediriger vers la page de connexion en cas d'erreur
+        navigate("/login");
+      }
     };
 
-    return (
-        <div>
-            <h1>Profile</h1>
-            <input type="file" onChange={handlePhotoUpload} />
-            {profilePhoto && <img src={profilePhoto} alt="Profile" />}
-        </div>
-    );
+    fetchCurrentUser();
+  }, [navigate]);
+
+  const handleSignOut = () => {
+    signOut(auth)
+    setCurrentUser(null);
+    console.log("Déconnexion réussie");
+    navigate("/");
+       
+};
+
+  if (!currentUser) {
+    // Afficher un message de chargement ou rediriger vers la page de connexion
+    return <p>Chargement en cours...</p>;
+  }
+
+  return (
+    <div>
+      <h2>Profil de {currentUser.displayName}</h2>
+      <div>
+        <strong>Nom d'utilisateur:</strong> {currentUser.displayName}
+      </div>
+      <div>
+        <strong>Email:</strong> {currentUser.email}
+      </div>
+      {/* Ajoutez d'autres informations de profil si nécessaire */}
+      <button onClick={handleSignOut}>Déconnexion</button>
+    </div>
+  );
 };
 
 export default Profile;
