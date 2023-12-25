@@ -41,7 +41,11 @@ function Header() {
                         <Nav.Link href="/" className="nav-item">Accueil</Nav.Link>
                         <Nav.Link href="/Carriere" className="nav-item">Carrière</Nav.Link>
                         {authUser ? (
+                            <>
                             <Nav.Link href="/" className="nav-item" onClick={handleSignOut}>Déconnexion</Nav.Link>
+                            <Nav.Link href="/Profile" className="nav-item">Mon Profile</Nav.Link>
+                            </>
+
                         ) : (
                             <Nav.Link href="/login" className="nav-item">Connexion</Nav.Link>
                         )}

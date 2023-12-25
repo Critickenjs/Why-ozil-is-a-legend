@@ -4,6 +4,8 @@ import Accueil from "./pages/Accueil";
 import Carriere from "./pages/Carriere";
 import Login from "./components/Login/login";
 import Signup from "./components/Login/Signup";
+import Profile from "./components/Profile/Profile";
+
 import './styles/styles.css'
 
 
@@ -17,6 +19,7 @@ const App = () => {
         <Route path="*" element={<Accueil />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );
