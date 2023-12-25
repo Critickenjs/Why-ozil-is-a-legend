@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../Firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import "./login.css";
+import "./signup.css";
 import Signup from "./Signup";
 
 const Login = () => {

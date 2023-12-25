@@ -43,7 +43,7 @@ function Header() {
                         {authUser ? (
                             <>
                             <Nav.Link href="/" className="nav-item" onClick={handleSignOut}>Déconnexion</Nav.Link>
-                            <Nav.Link href="/Profile" className="nav-item">Mon Profile</Nav.Link>
+                            <Nav.Link href="/Profile" className="nav-item">Mon profil</Nav.Link>
                             </>
 
                         ) : (
