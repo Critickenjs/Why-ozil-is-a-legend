@@ -85,7 +85,7 @@ const Profile = () => {
 
   return (
     <div className="profile-container"> 
-      <div className="profile-header-section"> 
+      <div className="profile-header-section">   
         <h2>Profil de {currentUser.displayName}</h2>
       </div>
       <div className="profile-details"> 
