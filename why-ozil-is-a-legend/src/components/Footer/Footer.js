@@ -3,7 +3,7 @@ import './Footer.css';
 
 const Footer = () => {
   const footerStyle = {
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     padding: '5px',
     textAlign: 'center',
     position: 'fixed',
@@ -11,12 +11,13 @@ const Footer = () => {
     width: '100%',
     justifyContent: 'center',
     spaceBetween: '10px',
-    color: 'white',
+    color: 'black',
   };
 
   const iconStyle = {
-    fontSize: '30px', 
-    margin: '0 5px', 
+    fontSize: '30px', // Ajustez la taille des icônes selon vos préférences
+    margin: '0 5px', // Espace entre les icônes
+    color: 'black',  // Couleur noire pour les icônes
   };
 
   const githubBtnStyle = {
@@ -27,22 +28,18 @@ const Footer = () => {
 
   const twitterBtnStyle = {
     ...iconStyle,
-    color: '#1DA1F2', 
   };
 
   const personalSiteBtnStyle = {
     ...iconStyle,
-    color: '#4CAF50', 
   };
 
   const discordBtnStyle = {
     ...iconStyle,
-    color: '#7289DA', 
   };
 
   return (
     <footer style={footerStyle}>
-      <a>Yliess El atifi</a>
       <div>
         <a
           href="https://github.com/Critickenjs"
@@ -52,21 +49,21 @@ const Footer = () => {
           <i className="fab fa-github" style={githubBtnStyle}></i>
         </a>
         <a
-          href="https://twitter.com/VotreNomTwitter"
+          href="https://twitter.com/liess_el"
           target="_blank"
           rel="noopener noreferrer"
         >
           <i className="fab fa-twitter" style={twitterBtnStyle}></i>
         </a>
         <a
-          href="https://votresite.com"
+          href="https://www.yliesselatifi.fr"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fas fa-globe" style={personalSiteBtnStyle}></i>
+            <i className="fas fa-briefcase" style={personalSiteBtnStyle}></i>
         </a>
         <a
-          href="https://discord.gg/VotreCodeDiscord"
+          href="https://discord.gg/AxxGFA8mRK"
           target="_blank"
           rel="noopener noreferrer"
         >

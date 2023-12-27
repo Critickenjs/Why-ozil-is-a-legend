@@ -115,14 +115,14 @@ function Header() {
                         <a href="/Carriere" class="nav-menu-item"><i class="fas fa-futbol me-3"></i>Carriere</a>
                         { authUser ? (
                                 <>
-                                    <a onClick={handleSignOut} class="nav-menu-item"><i class="fas fa-desktop me-3"></i>Déconnexion</a>
+                                    <a onClick={handleSignOut} class="nav-menu-item">Déconnexion</a>
                                     <a href="/Profile" class="nav-menu-item"><i class="fas fa-user me-3"></i>Mon profil</a>
 
                                 </>
                             ) : (
                             <>
 
-                            <a href="/signup" class="nav-menu-item"><i class="fas fa-desktop me-3"></i>Créer un compte</a>
+                            <a href="/signup" class="nav-menu-item">Créer un compte</a>
                             <a href="/login" class="nav-menu-item"><i class="fas fa-user me-3"></i>Se connecter</a>
                                                         </>
                             )}
