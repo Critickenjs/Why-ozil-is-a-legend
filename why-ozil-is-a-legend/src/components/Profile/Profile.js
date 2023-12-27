@@ -80,45 +80,78 @@ const Profile = () => {
   };
 
   if (!currentUser) {
-    return <p>Chargement en cours...</p>;
+    return <div className="d-flex align-items-center justify-content-center vh-100">
+    <div className="spinner-border text-dark" role="status">
+      <span className="visually-hidden">Chargement...</span>
+    </div>
+  </div>;
   }
 
   return (
-    <div className="profile-container"> 
-      <div className="profile-header-section">   
-        <h2>Profil de {currentUser.displayName}</h2>
-      </div>
-      <div className="profile-details"> 
-        <div className="profile-details-item"> 
-          <strong className="profile-details-label">Nom d'utilisateur:</strong>{" "}
-          {isEditing ? (
-            <input
-              className="edit-input-field" 
-              type="text"
-              placeholder={currentUser.displayName}
-              value={newUsername}
-              onChange={(e) => setNewUsername(e.target.value)}
-            />
-          ) : (
-            currentUser.displayName
-          )}
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-8">
+          <div className="card">
+            <div className="card-header">
+              <h2>Profil de {currentUser.displayName}</h2>
+            </div>
+            <div className="card-body">
+              <div className="mb-3">
+                <strong>Email :</strong> {currentUser.email}
+              </div>
+              <div className="mb-3">
+                <strong>Nom d'utilisateur :</strong>{" "}
+                {isEditing ? (
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={newUsername}
+                    onChange={(e) => setNewUsername(e.target.value)}
+                  />
+                ) : (
+                  <span>{currentUser.displayName}</span>
+                )}
+              </div>
+              <div className="mb-3">
+                <strong>URL de la photo :</strong>{" "}
+                {isEditing ? (
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={newPhotoURL}
+                    onChange={(e) => setNewPhotoURL(e.target.value)}
+                  />
+                ) : (
+                  <img
+                    src={currentUser.photoURL || 'URL_PAR_DEFAUT_SI_AUCUNE_PHOTO'}
+                    alt="User Avatar"
+                    className="img-fluid rounded-circle custom-img"
+                  />
+                )}
+              </div>
+              <button
+                className="btn btn-primary mr-2"
+                onClick={() => setIsEditing(!isEditing)}
+              >
+                {isEditing ? "Annuler" : "Modifier le profil"}
+              </button>
+              {isEditing && (
+                <button
+                  className="btn btn-success"
+                  onClick={handleUpdateUsername}
+                >
+                  Enregistrer les modifications
+                </button>
+              )}
+              <button
+                className="btn btn-danger float-end"
+                onClick={handleSignOut}
+              >
+                Déconnexion
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="profile-image-section"> 
-        <strong className="profile-details-label">Photo de profil:</strong>{" "}
-        {currentUser.photoURL ? (
-          <img className="profile-image" src={currentUser.photoURL} alt="Profile" /> 
-        ) : (
-          <p>Aucune photo de profil</p>
-        )}
-      </div>
-      <div className="edit-action-buttons"> 
-        {isEditing ? (
-          <button onClick={handleUpdateUsername}>Enregistrer</button>
-        ) : (
-          <button onClick={() => setIsEditing(true)}>Modifier le profil</button>
-        )}
-        <button onClick={handleSignOut}>Déconnexion</button>
       </div>
     </div>
   );

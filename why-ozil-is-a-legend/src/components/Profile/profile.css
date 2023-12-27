@@ -17,6 +17,10 @@
   font-size: 28px;
   color: #1da1f2;
 }
+.custom-img {
+  width: 400px; 
+  height: 400px; 
+}
 
 .profile-details {
   margin-bottom: 20px;
