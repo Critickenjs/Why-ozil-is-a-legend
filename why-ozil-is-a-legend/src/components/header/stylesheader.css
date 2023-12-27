@@ -83,5 +83,11 @@
   select.noStyle {
     border:none;
     outline:none;
-    color: #fff;
+    color: black;
+  }
+
+  #pub{
+    color: #eaeaea;
+    text-decoration: none;
+    font-size: 18px;
   }

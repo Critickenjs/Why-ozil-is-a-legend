@@ -3,7 +3,8 @@ import { auth } from "../../Firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
 import "./stylesheader.css";
-import { Nav , Navbar } from 'react-bootstrap';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 function Header() {
     const [authUser, setUser] = useState(null);
 
@@ -60,9 +61,7 @@ function Header() {
             <div className={`p-3 bg-dark text-white ${authUser ? 'drawMenu' : ''}`}>
                 <div className="flexMain">
                     <div className="flex1"></div>
-                    <div className="flex2 text-center">
-                        <div><strong>Yliess est trop beau</strong></div>
-                    </div>
+                        <div><strong><a id='pub' href='https://discord.gg/AxxGFA8mRK'>Rejoignez le discord ici <i class="fa-brands fa-discord"></i></a></strong></div>
                     <div className="flex1"></div>
                 </div>
             </div>
@@ -70,7 +69,7 @@ function Header() {
                 <div className={`sticky-top border-bottom border-top ${authUser ? 'drawMenu' : ''}`} id="mainNavigation">
                     <div className="flexMain">
                         <div className="flex2">
-                            <button className="whiteLink siteLink" style={{ borderRight: '1px solid #eaeaea' }} onClick={menuToggle}>
+                            <button className="whiteLink siteLink" style={{ borderRight: '1px solid #eaeaea',  color: 'black'}} onClick={menuToggle}>
                                 <i className="fas fa-bars me-2"></i> MENU
                             </button>
                         </div>
@@ -80,7 +79,7 @@ function Header() {
                         <div className="flex2 text-end d-block d-md-none">
                         </div>
                         <div className="flex2 text-end d-none d-md-block">
-                        {window.innerWidth >= 300 && authUser ? (
+                        { authUser ? (
                                 <>
                                     <button className="whiteLink siteLink" onClick={handleSignOut}>Déconnexion</button>
                                     <button className="blackLink siteLink" onClick={() => window.location.href = "/Profile"}>Mon profil</button>
@@ -113,7 +112,20 @@ function Header() {
                     <div>
                     <div>
                         <a href="/" class="nav-menu-item"><i class="fas fa-home me-3"></i>Accueil</a>
-                        <a href="/Carriere" class="nav-menu-item"><i class="fas fa-home me-3"></i>Carriere</a>
+                        <a href="/Carriere" class="nav-menu-item"><i class="fas fa-futbol me-3"></i>Carriere</a>
+                        { authUser ? (
+                                <>
+                                    <a onClick={handleSignOut} class="nav-menu-item"><i class="fas fa-desktop me-3"></i>Déconnexion</a>
+                                    <a href="/Profile" class="nav-menu-item"><i class="fas fa-user me-3"></i>Mon profil</a>
+
+                                </>
+                            ) : (
+                            <>
+
+                            <a href="/signup" class="nav-menu-item"><i class="fas fa-desktop me-3"></i>Créer un compte</a>
+                            <a href="/login" class="nav-menu-item"><i class="fas fa-user me-3"></i>Se connecter</a>
+                                                        </>
+                            )}
 
                     </div>  
                     </div>

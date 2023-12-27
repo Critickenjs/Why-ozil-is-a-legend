@@ -8,7 +8,6 @@ function Accueil() {
     return (
         <div>
             <Header />
-            <Playerprofile />
             <Footer />
         </div>
     );
