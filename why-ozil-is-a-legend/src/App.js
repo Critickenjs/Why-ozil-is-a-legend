@@ -5,6 +5,8 @@ import Login from "./components/Login/login";
 import Signup from "./components/Login/Signup";
 import Profile from "./components/Profile/Profile";
 import React, { useEffect, useState } from "react";
+import { auth } from "./Firebase";
+import Mesutmessenger from "./pages/MesutMessager";
 import { listenToAuthChanges } from "./authService";
 
 
@@ -36,6 +38,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/mesutmessenger" element={<Mesutmessenger />} />
       </Routes>
     </BrowserRouter>
   );

@@ -79,13 +79,30 @@ const Profile = () => {
     }
   };
 
-  if (!currentUser) {
-    return <div className="d-flex align-items-center justify-content-center vh-100">
-    <div className="spinner-border text-dark" role="status">
-      <span className="visually-hidden">Chargement...</span>
-    </div>
-  </div>;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading && !currentUser) {
+    return (
+      <div className="d-flex align-items-center justify-content-center vh-100">
+        <div className="spinner-border text-dark" role="status">
+          <span className="visually-hidden">Chargement...</span>
+        </div>
+      </div>
+    );
+  }else if (!currentUser) {
+    navigate("/login");
+    return null;
   }
+
+ 
 
   return (
     <div className="container mt-5">
